@@ -57,3 +57,8 @@ Metrics like comparisons, allocations, and recursion depth are captured via a pu
 - Core Logic: Efficiency is achieved by presorting the points and using a linear-time strip optimization when merging the recursive calls.
 - Validation: The algorithm's correctness was verified via JUnit 5 tests against a brute-force solution.  
   All performance metrics were collected using MetricsTracker.
+
+## Step 7: MergeSort Fixes Report (Committed on 2025-09-27)
+- Fixed minor bugs and added checks for edge cases (empty arrays, single-element arrays, duplicates).
+- Removed redundant MergeSort.sort(arr) calls in the tests.
+- All tests passed successfully, including edge cases.
