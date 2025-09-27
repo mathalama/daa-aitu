@@ -8,7 +8,7 @@
 - Configure **CI** using **GitHub Actions** to automatically build and test the project.
 
 ## Step 2: Implement Metrics Tracker and Integrate with MergeSort (committed on 2025-09-27)
-### MetricsTracker:
+
 - Comparison Counter: Increases each time items are compared during the sorting process.
 - Memory Allocation Counter: Increases with each allocation of memory (for example, when creating temporary arrays).
 - Recursion Depth Tracker: Tracks the current depth of recursion during sorting.
