@@ -44,9 +44,16 @@
 - Correctness Check: After sorting, assertions verify that the array is correctly sorted, ensuring no errors in the sorting logic.
 - Performance Logging: Each test logs sorting time and other metrics (comparisons, memory allocations, recursion depth) to a CSV file for analysis.
 
-## Step 5: IStep 5: Implement Deterministic Select Algorithm (committed on 2025-09-27)
+## Step 5: Implement Deterministic Select Algorithm (committed on 2025-09-27)
 
 - Implemented the Deterministic Select (Median-of-Medians) algorithm, which guarantees worst-case O(n) time complexity.
 The method uses a carefully chosen pivot from groups of 5 to prevent the O(n²) performance degradation seen in basic Quickselect.
 - The implementation was validated using JUnit 5 parameterized tests.
 Metrics like comparisons, allocations, and recursion depth are captured via a public static field and logged to a CSV file for analysis.
+
+## Step 6: Implement Closest Pair of Points Algorithm (Committed on 2025-09-27)
+
+- Implemented the O(n log n) Divide and Conquer algorithm to find the closest pair of points.
+- Core Logic: Efficiency is achieved by presorting the points and using a linear-time strip optimization when merging the recursive calls.
+- Validation: The algorithm's correctness was verified via JUnit 5 tests against a brute-force solution.  
+  All performance metrics were collected using MetricsTracker.
