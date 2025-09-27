@@ -8,7 +8,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class MetricsTracker {
     private final AtomicInteger comparisonCounter = new AtomicInteger(0);
     private final AtomicInteger allocationCounter = new AtomicInteger(0);
-    private int recursionDepth = 0;
+    private final AtomicInteger currentRecursionDepth = new AtomicInteger(0);
+    private final AtomicInteger maxRecursionDepth = new AtomicInteger(0);
 
     public void incrementComparisonCounter() {
         comparisonCounter.incrementAndGet();
@@ -19,27 +20,31 @@ public class MetricsTracker {
     }
 
     public void increaseRecursionDepth() {
-        recursionDepth++;
+        int depth = currentRecursionDepth.incrementAndGet();
+        maxRecursionDepth.updateAndGet(max -> Math.max(max, depth));
     }
-
     public void decreaseRecursionDepth() {
-        recursionDepth--;
+        currentRecursionDepth.decrementAndGet();
     }
 
-    public void writeMetricsToCSV(long timeTaken, String algorithmName) {
+    public void reset() {
+        comparisonCounter.set(0);
+        allocationCounter.set(0);
+        currentRecursionDepth.set(0);
+        maxRecursionDepth.set(0);
+    }
+
+    public void writeMetricsToCSV(long timeTaken, String algorithmName) throws IOException {
         try (FileWriter fileWriter = new FileWriter("target/metrics.csv", true);
              PrintWriter printWriter = new PrintWriter(fileWriter)) {
 
-            printWriter.printf("%s, %d, %d, %d, %d, %d\n",
+            printWriter.printf("%s, %d, %d, %d, %d\n",
                     algorithmName,
                     timeTaken,
                     comparisonCounter.get(),
                     allocationCounter.get(),
-                    recursionDepth,
-                    recursionDepth);
+                    maxRecursionDepth.get());
 
-        } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 }
