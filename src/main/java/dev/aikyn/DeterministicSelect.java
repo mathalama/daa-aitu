@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class DeterministicSelect {
-
     public static MetricsTracker lastRunMetrics;
 
     public static int deterministicSelect(int[] arr, int k) {

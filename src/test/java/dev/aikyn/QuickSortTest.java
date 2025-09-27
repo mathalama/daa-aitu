@@ -3,12 +3,10 @@ package dev.aikyn;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Random;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class QuickSortTest {
@@ -54,7 +52,7 @@ class QuickSortTest {
 
         System.out.println("Sorting " + size + " elements took: " + duration + " nanoseconds.");
 
-        metrics.writeMetricsToCSV(duration, "QuickSort");
+        metrics.writeMetricsToCSV(duration, "QuickSort_size_" + size);
 
         for (int i = 1; i < arr.length; i++) {
             assertTrue(arr[i - 1] <= arr[i], "Array should be sorted in ascending order.");

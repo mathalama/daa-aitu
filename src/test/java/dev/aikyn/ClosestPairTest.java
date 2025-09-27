@@ -3,12 +3,10 @@ package dev.aikyn;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Random;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ClosestPairTest {

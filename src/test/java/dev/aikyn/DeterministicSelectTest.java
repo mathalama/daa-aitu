@@ -3,13 +3,11 @@ package dev.aikyn;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.Random;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class DeterministicSelectTest {
@@ -63,7 +61,7 @@ class DeterministicSelectTest {
 
         System.out.println("Deterministic Select on " + size + " elements took: " + duration + " nanoseconds.");
 
-        metrics.writeMetricsToCSV(duration, "DeterministicSelect");
+        metrics.writeMetricsToCSV(duration, "DeterministicSelect_size_" + size);
 
         int[] sortedArr = arr.clone();
         Arrays.sort(sortedArr);
