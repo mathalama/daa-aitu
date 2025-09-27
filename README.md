@@ -20,7 +20,7 @@
 - The number of memory allocations.
 - The depth of recursion.
 
-## Step 3:
+## Step 3: Implementation MergeSort and MergeSortTest Testing (committed on 2025-09-27)
 ### Implementation MergeSort
 - Hybrid Algorithm: A hybrid approach was implemented, using Merge Sort for arrays larger than 16 elements and Insertion Sort for smaller ones to improve performance on small datasets.
 - Memory Optimization: A single buffer is used for the merge process, allocated only once to avoid repeated memory allocations within recursive calls.
@@ -29,3 +29,17 @@
 - JVM Warm-up: A dedicated method was added to warm up the JVM, ensuring that timing measurements are more accurate and stable.
 ### MetricsTracker:
 - Fixes were implemented to ensure the correct collection of metrics (execution time, comparisons, allocations, recursion depth) and their logging to a CSV file.
+
+## Step 4: Implement QuickSort and QuickSortTest (committed on 2025-09-27)
+### Implementation QuickSort
+- Randomized Pivot Selection: A random index is chosen as the pivot to reduce the chances of encountering worst-case performance (e.g., sorted or reverse-sorted arrays).
+- Tail Recursion Optimization: To minimize stack usage, the algorithm chooses the smaller subarray for recursive calls, reducing the recursion depth.
+- The partitioning process ensures elements are rearranged such that all values smaller than the pivot are on the left and those larger are on the right.
+- The algorithm then recursively sorts the two subarrays.
+
+### QuickSortTest
+- JUnit 5 Testing: A dedicated test class QuickSortTest was created to verify the correctness and performance of the QuickSort algorithm.
+- Parameterized Tests: The tests cover various array sizes, ranging from 0 to 2000 elements, ensuring the algorithm handles both small and large datasets.
+- JVM Warm-up: A warm-up method was introduced, running dummy sorting operations before the actual tests to stabilize JVM performance and improve the accuracy of benchmarking.
+- Correctness Check: After sorting, assertions verify that the array is correctly sorted, ensuring no errors in the sorting logic.
+- Performance Logging: Each test logs sorting time and other metrics (comparisons, memory allocations, recursion depth) to a CSV file for analysis.
