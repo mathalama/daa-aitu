@@ -22,7 +22,7 @@
 
 ## Step 3: Implementation MergeSort and MergeSortTest Testing (committed on 2025-09-27)
 ### Implementation MergeSort
-- Hybrid Algorithm: A hybrid approach was implemented, using Merge Sort for arrays larger than 16 elements and Insertion Sort for smaller ones to improve performance on small datasets.
+- Hybrid Algorithm: A hybrid approach was implemented,using Merge Sort for arrays larger than 16 elements and Insertion Sort for smaller ones to improve performance on small datasets.
 - Memory Optimization: A single buffer is used for the merge process, allocated only once to avoid repeated memory allocations within recursive calls.
 ### MergeSortTest Testing:
 - Parameterized Tests: JUnit 5 tests were written to verify correctness and performance on arrays of various sizes (from 0 to 2000).
@@ -43,3 +43,10 @@
 - JVM Warm-up: A warm-up method was introduced, running dummy sorting operations before the actual tests to stabilize JVM performance and improve the accuracy of benchmarking.
 - Correctness Check: After sorting, assertions verify that the array is correctly sorted, ensuring no errors in the sorting logic.
 - Performance Logging: Each test logs sorting time and other metrics (comparisons, memory allocations, recursion depth) to a CSV file for analysis.
+
+## Step 5: IStep 5: Implement Deterministic Select Algorithm (committed on 2025-09-27)
+
+- Implemented the Deterministic Select (Median-of-Medians) algorithm, which guarantees worst-case O(n) time complexity.
+The method uses a carefully chosen pivot from groups of 5 to prevent the O(n²) performance degradation seen in basic Quickselect.
+- The implementation was validated using JUnit 5 parameterized tests.
+Metrics like comparisons, allocations, and recursion depth are captured via a public static field and logged to a CSV file for analysis.
