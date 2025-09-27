@@ -1,64 +1,116 @@
-# Assignment 1 | Divide-and-Conquer Algorithms
+# **Divide-and-Conquer Algorithms Implementation and Performance Analysis**
 
-## Step 1: Initialize the project (committed on 2025-09-26)
-- The Git repository has been initialized.
-- Configured **Maven** for dependency management.
-- **JUnit 5** is connected for testing.
-- The initial file has been created `README.md `.
-- Configure **CI** using **GitHub Actions** to automatically build and test the project.
+## **Overview**
+This project implements four classic divide-and-conquer algorithms in Java 17 and analyzes their performance:
+1. **MergeSort**
+2. **QuickSort**
+3. **Deterministic Select (Median-of-Medians)**
+4. **Closest Pair of Points (2D)**
 
-## Step 2: Implement Metrics Tracker and Integrate with MergeSort (committed on 2025-09-27)
-### Implementation MetricsTracker:
-- Comparison Counter: Increases each time items are compared during the sorting process.
-- Memory Allocation Counter: Increases with each allocation of memory (for example, when creating temporary arrays).
-- Recursion Depth Tracker: Tracks the current depth of recursion during sorting.
-### CSV Logging:
-- After sorting, the following metrics are recorded:
-- The name of the algorithm.
-- Time of execution.
-- The number of comparisons.
-- The number of memory allocations.
-- The depth of recursion.
+Key features of the project:
+- Safe recursion patterns
+- Running-time analysis using Master Theorem and Akra-Bazzi intuition
+- Metrics collection (time, recursion depth, comparisons, allocations)
+- GitHub workflow for collaborative development
 
-## Step 3: Implementation MergeSort and MergeSortTest Testing (committed on 2025-09-27)
-### Implementation MergeSort
-- Hybrid Algorithm: A hybrid approach was implemented,using Merge Sort for arrays larger than 16 elements and Insertion Sort for smaller ones to improve performance on small datasets.
-- Memory Optimization: A single buffer is used for the merge process, allocated only once to avoid repeated memory allocations within recursive calls.
-### MergeSortTest Testing:
-- Parameterized Tests: JUnit 5 tests were written to verify correctness and performance on arrays of various sizes (from 0 to 2000).
-- JVM Warm-up: A dedicated method was added to warm up the JVM, ensuring that timing measurements are more accurate and stable.
-### MetricsTracker:
-- Fixes were implemented to ensure the correct collection of metrics (execution time, comparisons, allocations, recursion depth) and their logging to a CSV file.
+---
 
-## Step 4: Implement QuickSort and QuickSortTest (committed on 2025-09-27)
-### Implementation QuickSort
-- Randomized Pivot Selection: A random index is chosen as the pivot to reduce the chances of encountering worst-case performance (e.g., sorted or reverse-sorted arrays).
-- Tail Recursion Optimization: To minimize stack usage, the algorithm chooses the smaller subarray for recursive calls, reducing the recursion depth.
-- The partitioning process ensures elements are rearranged such that all values smaller than the pivot are on the left and those larger are on the right.
-- The algorithm then recursively sorts the two subarrays.
+## **Learning Goals**
+- Implement algorithms using divide-and-conquer approaches with safe recursion patterns.
+- Analyze the running-time recurrences of each algorithm using the Master Theorem and Akra-Bazzi intuition.
+- Collect and visualize key performance metrics like time, recursion depth, comparisons, and memory allocations.
 
-### QuickSortTest
-- JUnit 5 Testing: A dedicated test class QuickSortTest was created to verify the correctness and performance of the QuickSort algorithm.
-- Parameterized Tests: The tests cover various array sizes, ranging from 0 to 2000 elements, ensuring the algorithm handles both small and large datasets.
-- JVM Warm-up: A warm-up method was introduced, running dummy sorting operations before the actual tests to stabilize JVM performance and improve the accuracy of benchmarking.
-- Correctness Check: After sorting, assertions verify that the array is correctly sorted, ensuring no errors in the sorting logic.
-- Performance Logging: Each test logs sorting time and other metrics (comparisons, memory allocations, recursion depth) to a CSV file for analysis.
+---
 
-## Step 5: Implement Deterministic Select Algorithm (committed on 2025-09-27)
+## **Algorithms**
 
-- Implemented the Deterministic Select (Median-of-Medians) algorithm, which guarantees worst-case O(n) time complexity.
-The method uses a carefully chosen pivot from groups of 5 to prevent the O(n²) performance degradation seen in basic Quickselect.
-- The implementation was validated using JUnit 5 parameterized tests.
-Metrics like comparisons, allocations, and recursion depth are captured via a public static field and logged to a CSV file for analysis.
+### **1. MergeSort**
+- **Approach**: A divide-and-conquer algorithm that splits the array and merges it back using a linear merge process. A reusable buffer is employed for merging, and a small-n cut-off is used for efficiency (switching to insertion sort for small arrays).
+- **Time Complexity**: O(n log n) based on the Master Theorem (Case 2).
 
-## Step 6: Implement Closest Pair of Points Algorithm (Committed on 2025-09-27)
+### **2. QuickSort**
+- **Approach**: QuickSort utilizes a randomized pivot to ensure good performance on all input arrays, even adversarial ones. The algorithm recurses on the smaller partition and iterates over the larger one.
+- **Time Complexity**: O(n log n) on average.
 
-- Implemented the O(n log n) Divide and Conquer algorithm to find the closest pair of points.
-- Core Logic: Efficiency is achieved by presorting the points and using a linear-time strip optimization when merging the recursive calls.
-- Validation: The algorithm's correctness was verified via JUnit 5 tests against a brute-force solution.  
-  All performance metrics were collected using MetricsTracker.
+### **3. Deterministic Select (Median-of-Medians)**
+- **Approach**: This algorithm finds the k-th smallest element in O(n) time using the Median-of-Medians method, ensuring that recursion only happens on the relevant side.
+- **Time Complexity**: O(n).
 
-## Step 7: MergeSort Fixes Report (Committed on 2025-09-27)
-- Fixed minor bugs and added checks for edge cases (empty arrays, single-element arrays, duplicates).
-- Removed redundant MergeSort.sort(arr) calls in the tests.
-- All tests passed successfully, including edge cases.
+### **4. Closest Pair of Points (2D)**
+- **Approach**: The algorithm finds the closest pair of points in a 2D plane using sorting by x-coordinate, recursively splitting the points, and checking the "strip" that crosses the boundary.
+- **Time Complexity**: O(n log n).
+
+---
+
+## **Performance Metrics**
+The following performance metrics are tracked during execution:
+- **Execution Time**: Time taken to execute the algorithm on different input sizes.
+- **Recursion Depth**: The maximum recursion depth observed during execution.
+- **Number of Comparisons**: The number of comparisons made during the execution.
+- **Memory Allocations**: The number of memory allocations performed.
+
+These metrics are saved in CSV format for later analysis.
+
+---
+
+## **Plots and Visualizations**
+Here, you can include plots for the time vs. input size (n), recursion depth vs. input size (n), and any other relevant graphs. These visualizations help in understanding the performance characteristics of the algorithms.
+
+### MergeSort
+- **Time vs. n Plot**
+  ![Time vs n Plot](images/merge_sort_time_vs_size.png)
+- **Recursion Depth vs. n Plot**
+  ![Time vs n Plot](images/merge_sort_depth_vs_size.png)
+
+### QuickSort
+- **Time vs. n Plot**
+  ![Time vs n Plot](images/quick_sort_time_vs_size.png)
+- **Recursion Depth vs. n Plot**
+  ![Time vs n Plot](images/quick_sort_depth_vs_size.png)
+
+### Deterministic Select
+- **Time vs. n Plot**
+  ![Time vs n Plot](images/select_time_vs_size.png)
+- **Recursion Depth vs. n Plot**
+  ![Time vs n Plot](images/select_depth_vs_size.png)
+
+### Closest Pair of Points
+- **Time vs. n Plot**
+  ![Time vs n Plot](images/closest_time_vs_size.png)
+- **Recursion Depth vs. n Plot**
+  ![Time vs n Plot](images/closest_depth_vs_size.png)
+
+---
+
+## **GitHub Workflow**
+
+### **Branches**:
+- **main**: Contains stable, working versions of the project.
+- **feature/mergesort**: Implements the MergeSort algorithm.
+- **feature/quicksort**: Implements the QuickSort algorithm.
+- **feature/select**: Implements the Deterministic Select algorithm.
+- **feature/closest**: Implements the Closest Pair of Points algorithm.
+
+### **Commits**:
+The project follows a structured commit message format:
+- `init`: Project setup with Maven, JUnit5, and CI.
+- `feat(metrics)`: Implemented metrics collection (time, recursion depth, comparisons, allocations).
+- `feat(mergesort)`: MergeSort implementation with reusable buffer and small-n cut-off.
+- `feat(quicksort)`: QuickSort implementation with randomized pivot.
+- `feat(select)`: Deterministic Select implementation using Median-of-Medians.
+- `feat(closest)`: Closest Pair of Points implementation using divide-and-conquer.
+- `fix`: Bug fixes for edge cases like duplicates and tiny arrays.
+- `release`: Final version (v1.0).
+
+---
+
+## **Testing**
+
+Each algorithm has been tested for:
+- **Correctness**: Validating results against known solutions (e.g., comparing Select to `Arrays.sort(a)[k]`).
+- **Performance**: Ensuring recursion depth is bounded, and execution time aligns with the expected time complexity.
+
+---
+
+## **Conclusion**
+The project successfully implements four classic divide-and-conquer algorithms, analyzes their running-time complexities, and collects performance metrics. The results confirm the theoretical time complexities and provide insights into the efficiency of each algorithm in various scenarios.
