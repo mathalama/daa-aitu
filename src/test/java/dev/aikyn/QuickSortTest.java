@@ -1,6 +1,6 @@
 package dev.aikyn;
 
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import java.io.IOException;
@@ -9,8 +9,7 @@ import java.nio.file.Paths;
 import java.util.Random;
 import static org.junit.jupiter.api.Assertions.*;
 
-
-public class MergeSortTest {
+class QuickSortTest {
     private static final String METRICS_FILE_NAME = "target/metrics.csv";
     @BeforeAll
     static void clearMetricsFile() {
@@ -24,13 +23,12 @@ public class MergeSortTest {
     @BeforeAll
     static void warmUpJvm() {
         Random random = new Random();
-
         for (int i = 0; i < 10000; i++) {
             int[] dummyArray = new int[1];
             for (int j = 0; j < dummyArray.length; j++) {
                 dummyArray[j] = random.nextInt();
             }
-            MergeSort.sort(dummyArray);
+            QuickSort.sort(dummyArray);
         }
     }
 
@@ -45,14 +43,16 @@ public class MergeSortTest {
 
         long startTime = System.nanoTime();
 
-        MetricsTracker metrics = MergeSort.sort(arr);
+        QuickSort.sort(arr);
+
+        MetricsTracker metrics = QuickSort.sort(arr);
 
         long endTime = System.nanoTime();
         long duration = endTime - startTime;
 
         System.out.println("Sorting " + size + " elements took: " + duration + " nanoseconds.");
 
-        metrics.writeMetricsToCSV(duration, "MergeSort_size_" + size);
+        metrics.writeMetricsToCSV(duration, "QuickSort_size_" + size);
 
         for (int i = 1; i < arr.length; i++) {
             assertTrue(arr[i - 1] <= arr[i], "Array should be sorted in ascending order.");

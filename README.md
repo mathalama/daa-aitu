@@ -19,3 +19,4 @@
 - The number of comparisons.
 - The number of memory allocations.
 - The depth of recursion.
+
